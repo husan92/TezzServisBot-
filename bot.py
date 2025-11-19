@@ -1,15 +1,23 @@
-import os
+# bot.py
 from aiogram import Bot, Dispatcher, types
-from aiogram.utils import executor  # 2.x версиясида шундай импорт қилиш керак
+from aiogram.filters import Command
+import asyncio
 
-TOKEN = os.getenv("BOT_TOKEN").strip()  # токенни муҳит ўзгарувчисидан олиш
-bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+API_TOKEN = "YOUR_BOT_TOKEN_HERE"
 
-# /start буйруғига жавоб
-@dp.message_handler(commands=["start"])
-async def start_command(message: types.Message):
-    await message.reply("Салом! Бот фаол.")
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher()
+
+@dp.message(Command(commands=["start"]))
+async def cmd_start(message: types.Message):
+    await message.answer("Салом! Мен ишлаяпман 😊")
+
+async def main():
+    try:
+        print("Bot ishga tushdi...")
+        await dp.start_polling(bot)
+    finally:
+        await bot.session.close()
 
 if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
+    asyncio.run(main())
