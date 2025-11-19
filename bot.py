@@ -1,21 +1,17 @@
-import asyncio
-from aiogram import Bot, Dispatcher
-from aiogram.types import Message
+from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
-from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import Message
+import asyncio
 
-API_TOKEN = "SENING_BOT_TOKENING"
+BOT_TOKEN = "SENING_BOT_TOKEN"
 
-# Бот ва диспетчер
-bot = Bot(token=API_TOKEN)
-dp = Dispatcher(storage=MemoryStorage())
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
 
-# /start буйруғи
-@dp.message(Command(commands=["start"]))
-async def start_command(message: Message):
-    await message.answer("Salom! Bot ishga tushdi ✅")
+@dp.message(Command("start"))
+async def start_handler(message: Message):
+    await message.answer("Salom! Bot ishlayapti ✅")
 
-# Асосий цикл
 async def main():
     await dp.start_polling(bot)
 
