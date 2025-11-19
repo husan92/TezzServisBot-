@@ -1,5 +1,6 @@
 import os
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, types
+from aiogram.utils import executor  # 2.x версиясида шундай импорт қилиш керак
 
 TOKEN = os.getenv("BOT_TOKEN").strip()  # токенни муҳит ўзгарувчисидан олиш
 bot = Bot(token=TOKEN)
